@@ -9,8 +9,7 @@ public class StickObject : MonoBehaviour
     public float stickThreshold = 0.5f;  // Õ³¸½ãÐÖµ
 
     public bool isStuck = false;
-    private Vector3 stuckPosition;
-    private Quaternion stuckRotation;
+
 
     void Update()
     {
@@ -30,12 +29,21 @@ public class StickObject : MonoBehaviour
         // }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        // ¼ì²âÅö×²Á¦¶ÈÊÇ·ñ³¬¹ýÕ³¸½ãÐÖµ
-        if (!isStuck && collision.relativeVelocity.magnitude > stickThreshold)
+        // Your code here
+        Debug.Log("col " + collision);
+
+        if (collision.transform.gameObject.tag == "Block")
         {
-            
+            // creates joint
+            FixedJoint2D joint = gameObject.AddComponent<FixedJoint2D>();
+            // sets joint position to point of contact
+            joint.anchor = collision.contacts[0].point;
+            // conects the joint to the other object
+            joint.connectedBody = collision.transform.GetComponentInParent<Rigidbody2D>();
+            // Stops objects from continuing to collide and creating more joints
+            joint.enableCollision = false;
         }
     }
 }
