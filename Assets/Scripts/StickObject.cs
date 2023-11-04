@@ -35,7 +35,7 @@ public class StickObject : MonoBehaviour
         // ¼ì²âÅö×²Á¦¶ÈÊÇ·ñ³¬¹ýÕ³¸½ãÐÖµ
         if (!isStuck && collision.relativeVelocity.magnitude > stickThreshold)
         {
-            GroupController.Instance.objectsToGroup.Add(this.gameObject);
+            
         }
     }
 }

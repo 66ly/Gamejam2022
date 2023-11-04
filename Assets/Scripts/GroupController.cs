@@ -6,27 +6,6 @@ public class GroupController : MonoBehaviour
 {
     public List<GameObject> objectsToGroup;  // Assign the objects you want to group together in the inspector
 
-
-    private static readonly GroupController instance = new GroupController();
-
-    // Explicit static constructor to tell C# compiler
-    // not to mark type as beforefieldinit
-    static GroupController()
-    {
-    }
-
-    private GroupController()
-    {
-    }
-
-    public static GroupController Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-
     void Update()
     {
         Vector3 groupPosition = Vector3.zero;
