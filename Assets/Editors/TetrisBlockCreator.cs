@@ -6,9 +6,9 @@ using UnityEngine;
 public class TetrisBlockCreator : EditorWindow
 {
     private GameObject squarePrefab;
-    private string prefabName;
+    private string prefabName = "Default";
     private string matrixString = "0,0,0,0,0\n0,0,0,0,0\n0,0,0,0,0\n0,0,0,0,0\n0,0,0,0,0";
-    private string savePath = "Assets/Prefabs/TetrisBlock.prefab";
+    private string savePath = "Assets/Prefabs/";
     
     [MenuItem("Tools/Tetris Block Creator")]
     public static void ShowWindow()
@@ -46,7 +46,6 @@ public class TetrisBlockCreator : EditorWindow
 
         GameObject parentObject = new GameObject(prefabName);
         parentObject.AddComponent<Rigidbody2D>();
-        parentObject.AddComponent<BoxCollider2D>();
         parentObject.AddComponent<FollowMouse>();
         parentObject.AddComponent<StickObject>();
 
@@ -66,7 +65,7 @@ public class TetrisBlockCreator : EditorWindow
         }
 
         // Save the created object as a prefab
-        string finalPath = AssetDatabase.GenerateUniqueAssetPath(savePath);
+        string finalPath = AssetDatabase.GenerateUniqueAssetPath($"{savePath}{prefabName}.prefab");
         PrefabUtility.SaveAsPrefabAsset(parentObject, finalPath);
         DestroyImmediate(parentObject); // Destroy the temporary object in the scene
         Debug.Log("Tetris block prefab saved to: " + finalPath);
